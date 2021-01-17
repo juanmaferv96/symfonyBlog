@@ -1,0 +1,23 @@
+{# templates/index.html.twig #}
+{% extends 'blogBase.html.twig' %}
+
+{% block title %}Portada - Symfony HackBlog{% endblock %}
+
+{% block main %}
+<h2>Últimas entradas</h2>
+<ul class="listaNoticias">
+        {% for noticia in noticias %}
+            <li class='bloqueNoticia'>
+                <img src='images/thumbnail-{{noticia.id}}.jpg' />
+                <h3><a href='{{path('noticia', {'id': noticia.id})}}'>{{noticia.titular}}</a></h3>
+                <p>{{noticia.entradilla|raw}}</p>
+                <p><a href='{{path('noticia', {'id': noticia.id})}}'>Leer más</a></p>
+                <p>Publicada en: {{noticia.fecha|date('d-m-Y')}}.</p>
+            </li>
+        {% else %}
+            <li>No hay noticias</li>
+        {% endfor %}
+        <p><a href="{{ path('nuevaNoticia') }}"> Nueva noticia</a></p>
+
+    </ul>
+{% endblock %}
